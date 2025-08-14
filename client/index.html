@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xm" href="./public/building-2-fill.svg" />
+    <!-- preconnect to external domain -->
+     <link rel="dns-prefetch" href="https://fonts.cdnfonts.com">
+     <link rel="dns-prefetch" href="https://res.cloudinary.com">
+     <!-- preconnect with crossorigin - crossorigin is for d -->
+      <link rel="preconnect" href="https://fonts.cdnfonts.com" crossorigin="anonymous">
+      <link rel="preconnect" href="https://res.cloudinary.com" crossorigin="anonymous">
+      <!-- for people that want to printing -->
+      <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/br-shape" media="print" onload="this.media='all'">
+      <!-- preload critical resources - to make sure the font as quickly as possible -->
+       <link rel="preload" as="style" href="https://fonts.cdnfonts.com/css/br-shape">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#3b82f6"/>
+    <!-- default meta tag -->
+    <meta name="description" content="Clinicare - Modern Hospital Management System">
+    <!-- ios specific devices - to make sure its on okay on mobile screen especially for ios, for when you are scrolling the status bar will be removed-->
+     <meta name="mobile-web-app-capable" content="yes">
+     <meta name="apple-mobile-web-app-status-bar-style" content="default">
+     <!-- preload critical css - preload means to do it in high prioryty, and the onload is that we don't want it to load multiple time-->
+      <!-- fallback for browsers if they disable javascript -->
+      <link rel="preload" href="/src/index.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="/src/index.css"/></noscript>
+    <title>Clinicare</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

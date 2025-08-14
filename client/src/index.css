@@ -1,0 +1,61 @@
+@import url('https://fonts.cdnfonts.com/css/br-shape');
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+
+* {
+  scroll-behavior: smooth;
+}
+
+:root {
+  font-family: 'BR Shape', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* ask chatgpt */
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.bg-angular-gradient {
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+ #E2EBFF 0deg, #E5EDFF 360deg);
+}
+
+::view-transition-old(root) {
+  animation: fade-out 300ms ease-in forwards;
+  -webkit-animation: fade-out 300ms ease-in forwards;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 500ms ease-in forwards;
+  -webkit-animation: fade-in 500ms ease-in forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
