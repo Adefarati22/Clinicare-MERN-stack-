@@ -59,7 +59,7 @@ export default function Appointments() {
           Manage patients appointments.
         </p>
       </div>
-      <div className="flex flex-wrap gap-2 mb-5 justify-end items-center">
+      <div className="flex mb-5 justify-end items-center">
         <Search id="search-adminAppointments">
           <Filter />
         </Search>
