@@ -19,7 +19,7 @@ export default function CreatePayment() {
   const [msg, setMsg] = useState(null);
   const [err, setError] = useState(null);
   const { accessToken } = useAuth();
-  const { queryClient } = useQueryClient();
+  const  queryClient  = useQueryClient();
   const { isPending, data, error, isError } = useQuery({
     queryKey: ["getAppointmentsMeta", accessToken],
     queryFn: () => getAppointmentMeta(accessToken),
@@ -104,9 +104,14 @@ export default function CreatePayment() {
   }
 
   const resetModal = async () => {
-    await queryClient.invalidateQueries({
-      queryKey: ["getAllPayments", "getPatientPayments"],
-    });
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: ["getPatientPayments"],
+      }),
+      queryClient.invalidateQueries({
+        queryKey: ["getAllPayments"],
+      }),
+    ]);
     setIsOpen(false);
     setShowSuccess(false);
     setError(null);

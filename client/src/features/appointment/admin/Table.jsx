@@ -12,12 +12,12 @@ export default function Table({ appointments }) {
       case "appointmentId":
         return (
           <>
-            <h1 className="">{appointments?._id}</h1>
+            <h1>{appointments?._id}</h1>
           </>
         );
       case "patientName":
         return (
-          <div className="capitalize">{appointments?.patientId?.fullname}</div>
+          <div className="whitespace-normal break-words text-sm capitalize">{appointments?.patientId?.fullname}</div>
         );
       case "doctor":
         return (
@@ -38,7 +38,7 @@ export default function Table({ appointments }) {
       case "status":
         return (
           <div
-            className={`capitalize badge badge-sm font-bold ${
+            className={`capitalize badge badge-xs md:badge-lg font-bold ${
               appointmentsStatusColors[appointments?.status]
             }`}
           >
@@ -47,7 +47,7 @@ export default function Table({ appointments }) {
         );
       case "action":
         return (
-          <div className="flex gap-4 items-center">
+          <div className="flex flex-col md:flex-row gap-2 items-center">
             <Response appointments={appointments} />
             <ConfirmAppointment appointments={appointments} />
           </div>

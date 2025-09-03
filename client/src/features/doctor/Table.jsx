@@ -23,7 +23,7 @@ export default function Table({ doctors }) {
       case "availability":
         return (
           <div
-            className={`capitalize badge badge-lg font-semibold
+            className={`capitalize badge badge-xs md:badge-lg font-semibold
             ${doctorsStatusColors[doctors?.availability]}`}
           >
             {doctors?.availability}

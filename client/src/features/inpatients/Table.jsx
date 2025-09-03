@@ -36,7 +36,7 @@ export default function Table({ inpatients }) {
       case "status":
         return (
           <div
-            className={`capitalize badge font-semibold ${
+            className={`capitalize badge badge-xs md:badge-lg font-semibold ${
               inpatientStatusColors[inpatient.status]
             }`}
           >

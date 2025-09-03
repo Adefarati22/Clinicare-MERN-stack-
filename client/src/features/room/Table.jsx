@@ -39,7 +39,7 @@ export default function Table({ rooms }) {
         );
       case "roomStatus":
         return (
-          <div className={`capitalize badge badge-lg font-semibold
+          <div className={`capitalize badge badge-xs md:badge-lg font-semibold
             ${roomsStatusColors[rooms?.roomStatus]}`} >
             {rooms?.roomStatus}
           </div>
