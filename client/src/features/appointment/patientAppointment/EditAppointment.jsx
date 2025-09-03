@@ -72,7 +72,7 @@ export default function EditAppointment({ appointments}) {
               <RiEditFill className="text-blue-500" />
       </button>
       <Modal
-        id="PatientAppointmentModal"
+        id="PatientEditModal"
         isOpen={isOpen}
         classname="bg-white p-4 rounded-xl shadow w-[90%] max-w-[600px] mx-auto"
       >

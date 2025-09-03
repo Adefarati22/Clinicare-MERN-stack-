@@ -70,7 +70,7 @@ export default function BookAppointment() {
         Book Appointment
       </button>
       <Modal
-        id="addUserModal"
+        id="bookModal"
         isOpen={isOpen}
         classname="bg-white p-4 rounded-xl shadow w-[90%] max-w-[600px] mx-auto"
       >

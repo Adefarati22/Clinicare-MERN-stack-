@@ -87,7 +87,7 @@ export default function Edit({ item }) {
         Edit
       </button>
       <Modal
-        id="editModal"
+        id="editUseModal"
         isOpen={isOpen}
         classname="bg-white p-4 rounded-xl shadow w-[90%] max-w-[600px] mx-auto"
       >

@@ -78,7 +78,7 @@ export default function Edit({ rooms }) {
         <RiEditFill className="text-blue-500" />
       </button>
       <Modal
-        id="roomModal"
+        id="roomEditModal"
         isOpen={isOpen}
         classname="bg-white p-4 rounded-xl shadow w-[90%] max-w-[600px] mx-auto"
       >
