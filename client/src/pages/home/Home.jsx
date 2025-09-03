@@ -6,9 +6,9 @@ import {
   RiBillFill,
   RiNotification2Fill,
   RiFileTextLine,
-  RiChatAiLine,
+  RiMessage2Fill,
 } from "@remixicon/react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export default function Home() {
   useMetaArgs({
@@ -16,14 +16,15 @@ export default function Home() {
     description: "Welcome to your clinicare user",
     keywords: "Health, Clinic, Hospital",
   });
+  const location = useLocation();
   return (
     <div className="overflow-hidden"> 
      <Link
           to={"/Contact_Us"}
-          className="md:hidden fixed bottom-4 left-[200px] right-3 z-50"
+          className={`${location.pathname === "/" ? "md:hidden fixed bottom-4 left-[200px] right-3 z-50" : " "}`}
         >
         <div className="bg-blue-500 p-3 rounded-full shadow-lg flex justify-center items-center gap-2 hover:bg-blue-600 transition-colors">
-          <RiChatAiLine size={24} className="text-white"/> <span className="text-white">Contact us</span>
+          <RiMessage2Fill size={24} className="text-white"/> <span className="text-white">Contact us</span>
         </div>
         </Link>
       <div className="flex flex-col justify-center items-center px-4 bg-gradient-to-b from-[#FFF9F9] to-[#3874FF] bg-angular-gradient">
@@ -42,12 +43,12 @@ export default function Home() {
           {/* button div */}
           <div className="mt-8 flex gap-4 items-center justify-center">
             <Link to={"/account/signup"}>
-              <button className="btn bg-blue-500 text-white hover:bg-blue-600 p-6 rounded-md">
+              <button className="btn bg-blue-500 text-white hover:bg-blue-600 p-6 rounded-md transition-all">
                 New Patient
               </button>
             </Link>
             <Link to={"account/signin"}>
-              <button className="btn border-blue-500 text-blue-500 bg-transparent p-6 rounded-md hover:bg-blue-200 hover:text-blue-600">
+              <button className="btn border-blue-500 text-blue-500 bg-transparent p-6 rounded-md hover:bg-blue-100">
                 Login to Clinicare
               </button>
             </Link>
@@ -72,7 +73,7 @@ export default function Home() {
         {/* key features */}
         <div className="grid grid-cols-12 mt-8 gap-4 lg:gap-8" id="#features">
           {/* appointment  */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#D5E2FF] rounded-full w-15 h-15 p-4">
               <RiCalendarScheduleLine size={30} className="text-[#1055F8] " />
             </div>
@@ -87,7 +88,7 @@ export default function Home() {
             </div>
           </div>
           {/* doctor department */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#FFD7FF] rounded-full w-15 h-15 p-4">
               <RiUserHeartLine size={30} className="text-[#F805F8] " />
             </div>
@@ -102,7 +103,7 @@ export default function Home() {
             </div>
           </div>
           {/* analytics */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#DDFFDD] rounded-full w-15 h-15 p-4">
               <RiLineChartLine size={30} className="text-[#02DB02] " />
             </div>
@@ -115,7 +116,7 @@ export default function Home() {
             </div>
           </div>
           {/* billing */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#FFE2E2] rounded-full w-15 h-15 p-4">
               <RiBillFill size={30} className="text-[#FF0000] " />
             </div>
@@ -128,7 +129,7 @@ export default function Home() {
             </div>
           </div>
           {/* automated reminder */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#FFEFD2] rounded-full w-15 h-15 p-4">
               <RiNotification2Fill size={30} className="text-[#FFA500] " />
             </div>
@@ -141,7 +142,7 @@ export default function Home() {
             </div>
           </div>
           {/* electronic medical */}
-          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
+          <div className="flex flex-col justify-center items-start col-span-12 md:col-span-6 lg:col-span-4 bg-white rounded-lg shadow-lg border-gray-500 border p-10 h-[290px]">
             <div className="bg-[#EBD7FF] rounded-full w-15 h-15 p-4">
               <RiFileTextLine size={30} className="text-[#8100FA] " />
             </div>
@@ -158,7 +159,7 @@ export default function Home() {
         </div>
       </div>
       {/* how it works*/}
-      <div className="container mx-auto py-5 px-4 my-14" id="#howitworks">
+      <div className="container mx-auto py-5 px-4 my-14" id="how_it_works">
         <div className="text-center">
           <h1 className="text-2xl md:text-3xl font-bold text-[#130A5C]">
             How It Works{" "}
@@ -169,9 +170,9 @@ export default function Home() {
           </p>
         </div>
         <div className="grid grid-cols-12 gap-6 lg:gap-8 mt-8 relative">
-          <div className="hidden md:block absolute left-1/2 top-0 h-full w-px bg-gray-300 transform -translate-x-1/2 z-0" />
+          <div className="hidden lg:block absolute left-1/2 top-0 h-full w-px bg-gray-300 transform -translate-x-1/2 z-0" />
           {/* hospital profile */}
-          <div className="md:flex justify-center items-center gap-8 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 md:p-0">
+          <div className="lg:flex justify-center items-center gap-8 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 lg:p-0">
             {/* text */}
             <div className=" max-w-xl">
               <div className="flex gap-1">
@@ -195,7 +196,7 @@ export default function Home() {
           </div>
 
           {/* online booking */}
-          <div className="md:flex flex-row-reverse justify-center items-center  gap-25 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 md:p-0 ">
+          <div className="lg:flex flex-row-reverse justify-center items-center gap-25 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 lg:p-0 ">
             <div className=" max-w-xl">
               <div className="flex gap-1">
                 <div className="bg-[#1055F8] rounded-full w-10 h-10 flex justify-center items-center mb-2">
@@ -216,7 +217,7 @@ export default function Home() {
             </div>
           </div>
           {/* appointment */}
-          <div className="md:flex justify-center items-center gap-8 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 md:p-0">
+          <div className="lg:flex justify-center items-center gap-8 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 lg:p-0">
             <div className=" max-w-xl">
              <div className="flex gap-1">
                <div className="bg-[#1055F8] rounded-full w-10 h-10 flex justify-center items-center mb-2">
@@ -239,7 +240,7 @@ export default function Home() {
             </div>
           </div>
           {/* track everything */}
-          <div className="md:flex flex-row-reverse justify-center items-center gap-25 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 md:p-0">
+          <div className="lg:flex flex-row-reverse justify-center items-center gap-25 bg-white col-span-12 rounded-xl shadow-2xl lg:shadow-none p-2 lg:p-0">
             <div className=" max-w-[520px]">
              <div className="flex gap-1">
                <div className="bg-[#1055F8] rounded-full w-10 h-10 flex justify-center items-center mb-2">

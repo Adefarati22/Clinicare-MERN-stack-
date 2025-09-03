@@ -1,5 +1,5 @@
 import { RiUser4Fill } from "@remixicon/react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { validatedSignInSchema } from "@/utils/dataSchema";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,8 @@ export default function Login() {
   } = useForm({
     resolver: zodResolver(validatedSignInSchema),
   });
-    const { setAccessToken } = useAuth();
+    const { setAccessToken, user } = useAuth();
+    const navigate = useNavigate();
 
 
   const togglePassword = () => {
@@ -35,12 +36,14 @@ export default function Login() {
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (response) => {
-      // console.log(response);
       toast.success(response?.data?.message || "Login successful");
       setAccessToken(response?.data?.data?.accessToken); // save accessToken
+      if(!user?.isVerified) {
+        navigate("/Verify-account") //re-routing to verify page
+      }
     },
     onError: (error) => {
-      console.log(error);
+        import.meta.env.DEV && console.log(error);
       setError(error?.response?.data?.message || "Login failed");
     },
   });

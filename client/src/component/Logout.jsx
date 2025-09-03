@@ -18,13 +18,13 @@ export default function Logout() {
     mutationFn: logout,
     onSuccess: (response) => {
       toast.success(response?.data?.message);
-      queryClient.invalidateQueries({ queryKey: ["auth_user"] });
+      queryClient.clear() //to clear all queries rather than just the user
       setIsOpen(false);
       setAccessToken(null); // Clear the access token from context
       navigate('/account/signin');
     },
     onError: (error) => {
-      console.log(error);
+     import.meta.env.DEV && console.log(error);
 
       toast.error(error?.response?.data?.message, { id: "logout" }); //the id is to prevent duplicate toasts
     },

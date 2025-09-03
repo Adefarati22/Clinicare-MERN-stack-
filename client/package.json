@@ -19,10 +19,12 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.60.0",
+    "react-paystack": "^6.0.0",
     "react-pin-field": "^4.0.2",
     "react-router": "^7.6.3",
     "sonner": "^2.0.6",
     "tailwindcss": "^4.1.11",
+    "use-debounce": "^10.0.5",
     "zod": "^4.0.5"
   },
   "devDependencies": {

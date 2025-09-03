@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { lazy, Suspense } from "react";
 import { LazyLoader } from "@/component/LazyLoader";
-import { PublicRoutes, PrivateRoutes } from "./ProtectedRoutes";
+import { PublicRoutes, PrivateRoutes, VerifiedRoutes } from "./ProtectedRoutes";
 import { useAuth } from "@/contextStore/Index";
+import ErrorBoundary from "@/component/ErrorBoundary";
 
 // render pages
 const RootLayout = lazy(() => import("@/layout/RootLayout"));
@@ -21,15 +22,36 @@ const PatientOnboarding = lazy(() =>
 );
 const VerifyAccount = lazy(() => import("@/pages/verifyAccount/VerifyAccount"));
 const DashboardLayout = lazy(() => import("@/layout/DashboardLayout"));
-const Dashboard = lazy(() => import("@/pages/sidebarPages/dashboard/Dashboard"));
-const Appointments = lazy(() => import("@/pages/sidebarPages/appointment/Appointments"));
+const Dashboard = lazy(() =>
+  import("@/pages/sidebarPages/dashboard/Dashboard")
+);
+const Appointments = lazy(() =>
+  import("@/pages/sidebarPages/appointment/Appointments")
+);
+const PatientAppointments = lazy(() =>
+  import("@/pages/sidebarPages/appointment/PatientAppointments")
+);
 const Rooms = lazy(() => import("@/pages/sidebarPages/room/Rooms"));
 const Payments = lazy(() => import("@/pages/sidebarPages/payment/Payments"));
+const PatientPayments = lazy(() =>
+  import("@/pages/sidebarPages/payment/PatientPayments")
+);
 const Doctors = lazy(() => import("@/pages/sidebarPages/doctor/Doctors"));
 const Patients = lazy(() => import("@/pages/sidebarPages/patient/Patients"));
-const Inpatients = lazy(() => import("@/pages/sidebarPages/inpatient/Inpatients"));
+const Inpatients = lazy(() =>
+  import("@/pages/sidebarPages/inpatient/Inpatients")
+);
 const Users = lazy(() => import("@/pages/sidebarPages/user/Users"));
 const Settings = lazy(() => import("@/pages/sidebarPages/settingsss/Settings"));
+const Account = lazy(() =>
+  import("@/pages/sidebarPages/settingsss/account/Account")
+);
+const Password = lazy(() =>
+  import("@/pages/sidebarPages/settingsss/password/Password")
+);
+const HealthRecords = lazy(() =>
+  import("@/pages/sidebarPages/settingsss/healthRecords/HealthRecord")
+);
 
 // variables names here are capital letter because they going to be our component
 
@@ -44,6 +66,7 @@ export default function AppRoutes() {
           </PublicRoutes>
         </Suspense>
       ),
+      errorElement: <ErrorBoundary />,
       children: [
         {
           index: true,
@@ -72,6 +95,7 @@ export default function AppRoutes() {
           </PublicRoutes>
         </Suspense>
       ),
+      errorElement: <ErrorBoundary />,
       children: [
         {
           path: "signin",
@@ -110,11 +134,12 @@ export default function AppRoutes() {
     {
       element: (
         <Suspense fallback={<LazyLoader />}>
-          <PrivateRoutes accessToken={accessToken} user={user}>
+          <VerifiedRoutes accessToken={accessToken} user={user}>
             <OnbordingLayout />
-          </PrivateRoutes>
+          </VerifiedRoutes>
         </Suspense>
       ),
+      errorElement: <ErrorBoundary />,
       children: [
         {
           path: "/patient-onboard",
@@ -135,7 +160,7 @@ export default function AppRoutes() {
       ],
     },
     {
-      path: "/dashboard",
+      path: "dashboard",
       element: (
         <Suspense fallback={<LazyLoader />}>
           <PrivateRoutes accessToken={accessToken} user={user}>
@@ -143,6 +168,7 @@ export default function AppRoutes() {
           </PrivateRoutes>
         </Suspense>
       ),
+      errorElement: <ErrorBoundary />,
       children: [
         {
           index: true,
@@ -157,6 +183,14 @@ export default function AppRoutes() {
           element: (
             <Suspense fallback={<LazyLoader />}>
               <Appointments />
+            </Suspense>
+          ),
+        },
+        {
+          path: "patient-appointments",
+          element: (
+            <Suspense fallback={<LazyLoader />}>
+              <PatientAppointments />
             </Suspense>
           ),
         },
@@ -176,6 +210,15 @@ export default function AppRoutes() {
             </Suspense>
           ),
         },
+        {
+          path: "patient-payments",
+          element: (
+            <Suspense fallback={<LazyLoader />}>
+              <PatientPayments />
+            </Suspense>
+          ),
+        },
+
         {
           path: "doctors",
           element: (
@@ -215,6 +258,32 @@ export default function AppRoutes() {
               <Settings />
             </Suspense>
           ),
+          children: [
+            {
+              path: "account",
+              element: (
+                <Suspense fallback={<LazyLoader />}>
+                  <Account />
+                </Suspense>
+              ),
+            },
+            {
+              path: "password",
+              element: (
+                <Suspense fallback={<LazyLoader />}>
+                  <Password />
+                </Suspense>
+              ),
+            },
+            {
+              path: "health",
+              element: (
+                <Suspense fallback={<LazyLoader />}>
+                  <HealthRecords />
+                </Suspense>
+              ),
+            },
+          ],
         },
       ],
     },

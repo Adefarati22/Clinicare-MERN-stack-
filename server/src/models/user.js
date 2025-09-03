@@ -27,7 +27,7 @@ const userSchema = new Schema({
   },
   phone: {
     type: String,
-    maxlength: [14, "Phone number must not exceed 11 digit"],
+    default: "N/A"
   },
   avatar: {
     type: String, //its a string bcs cloudinary will help us convert the img to a url string

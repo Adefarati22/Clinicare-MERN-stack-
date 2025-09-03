@@ -14,7 +14,7 @@ export default function AuthLayout() {
         <Outlet />
       </div>
       {/* footer */}
-       <div className=" py-3 px-10 bg-[#0232A2]  text-white text-center md:mt-30">
+       <div className=" py-2 px-10 bg-[#0232A2]  text-white text-center md:mt-30">
         {/* hr line in css is divider */}
         <div className="flex justify-center md:items-center md:justify-start gap-1 text-xs md:text-lg">
         Copyright

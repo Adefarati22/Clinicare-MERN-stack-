@@ -1,5 +1,5 @@
 import { RiUser4Fill } from "@remixicon/react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import { validatedSignUpSchema } from "@/utils/dataSchema";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,8 @@ export default function Register() {
   } = useForm({
     resolver: zodResolver(validatedSignUpSchema),
   });
-  const { setAccessToken } = useAuth();
+  const { user, setAccessToken } = useAuth();
+  const navigate = useNavigate();
 
   const togglePassword = () => {
     setIsVisible((prev) => !prev);
@@ -40,9 +41,12 @@ export default function Register() {
       //what you want to do if api call is a success
       toast.success(response?.data?.message || "Registration successful"); //toast
       setAccessToken(response?.data?.data?.accessToken); // save accessToken
+        if(!user?.isVerified) {
+        navigate("/Verify-account")
+      }
     },
     onError: (error) => {
-      console.log(error);
+        import.meta.env.DEV && console.log(error);
       setError(error?.response?.data?.message || "Registration failed");
     },
   });
@@ -124,33 +128,6 @@ export default function Register() {
               </span>
             )}
           </div>
-          {/* optional */}
-          {/* <div>
-            <label className="label text-zinc-800 font-bold p-2">
-              Optional
-            </label>
-
-            <select
-              defaultValue=""
-              className="select w-full"
-              {...register("role")}
-            >
-              <option value="" disabled>
-                Pick a role
-              </option>
-              <option value={"admin"}>Admin</option>
-              <option value={"staff"}>Staff</option>
-              <option value={"doctor"}>Doctor</option>
-              <option value={"nurse"}>Nurse</option>
-              <option value={"patient"}>Patient</option>
-            </select>
-            {errors.role?.message && (
-              <span className="text-xs text-red-500">
-                {errors.role?.message}
-              </span>
-            )}
-          </div> */}
-
           {/* sign in button */}
           <button
             className="btn bg-blue-500 mt-4 text-white hover:bg-blue-600"

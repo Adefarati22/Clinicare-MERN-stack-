@@ -5,6 +5,11 @@ import { useForm } from "react-hook-form";
 import { bloodGroup, formatDate } from "@/utils/constant";
 import { useAuth } from "@/contextStore/Index";
 import { useMemo, useState, useEffect } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { registerPatient } from "@/api/patients";
+import { toast } from "sonner";
+import { useNavigate } from "react-router";
+import ErrorAlert from "@/component/ErrorAlert";
 
 export default function PatientOnboarding() {
   useMetaArgs({
@@ -12,6 +17,13 @@ export default function PatientOnboarding() {
     description: "Complete your patient profile",
     keywords: "Health, Register, Clinic, Hospital",
   });
+  const { user, accessToken } = useAuth();
+
+  const [currentStep, setCurrentStep] = useState(
+    user?.isCompletedOnboard ? 3 : 1
+  ); //if user has finished onboarding, set step to 3
+  const [field, setField] = useState(false);
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -21,11 +33,8 @@ export default function PatientOnboarding() {
   } = useForm({
     resolver: zodResolver(validatePatientSchema),
   });
-  const { user } = useAuth();
-
-  const [currentStep, setCurrentStep] = useState(1);
-  const [field, setField] = useState(false);
-
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const gender = ["male", "female", "other"];
   const bloodGroupOptions = Object.entries(bloodGroup).map(([key, value]) => ({
     name: key,
@@ -36,7 +45,7 @@ export default function PatientOnboarding() {
       setValue("fullname", user?.fullname);
       setValue("email", user?.email);
       setValue("phone", user?.phone);
-      setValue("dateOfBirth", formatDate(user?.dateOfBirth));
+      setValue("dateOfBirth", formatDate(user?.dateOfBirth || "", "input"));
     }
   }, [user, setValue]);
 
@@ -75,8 +84,25 @@ export default function PatientOnboarding() {
     }
   };
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const mutation = useMutation({
+    mutationFn: registerPatient,
+    onSuccess: (response) => {
+      if (response.status === 201) {
+        toast.success(response?.data?.message);
+        //clear old user data
+        queryClient.invalidateQueries({ queryKey: ["auth_user"] });
+      }
+    },
+    onError: (error) => {
+        import.meta.env.DEV && console.log(error);
+      setError(
+        error?.response?.data?.message || "Error registering your details"
+      );
+    },
+  });
+
+  const onSubmit = async (formData) => {
+    mutation.mutate({ formData, accessToken }); //we are passing accessToken because we need it for the API call
   };
 
   return (
@@ -84,8 +110,12 @@ export default function PatientOnboarding() {
       <h1 className="font-bold text-xl md:text-3xl">Patients Onboard</h1>
       <div className=" bg-white border-base-300 rounded-3xl border p-4 w-full max-w-[600px] flex flex-col justify-center gap-2 shadow-lg">
         <p className="text-center md:pb-5 ">
-          Hello <b>{user.fullname}</b>, Please complete your patient profile
+          Hello <b>{user?.fullname}</b>,{" "}
+          {user?.isCompletedOnboard
+            ? "Onboarding completed"
+            : "Please complete your patient profile"}
         </p>
+        {error && <ErrorAlert error={error} />}
         {/* this was going to be a progress bar for the stepper it was gotten from daisy ui */}
         <ul className="steps">
           <li
@@ -310,24 +340,54 @@ export default function PatientOnboarding() {
               </div>
             </>
           )}
+          {/* part-3 */}
+          {currentStep === 3 && (
+            <div className="md:col-span-12 p-4 text-center">
+              <img
+                src="/Success.svg"
+                alt="success"
+                className="w-full h-[200px]"
+              />
+              <h1 className="text-2xl font-bold">Congratulations!</h1>
+              <p className="text-gray-600">
+                "Your account has been verified successfully."
+              </p>
+              <button
+                className="btn my-4 bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"
+                size="lg"
+                onClick={() => navigate("/dashboard", { replace: true })}
+              >
+                Continue to dashboard
+              </button>
+            </div>
+          )}
           {/* button */}
           <div className="col-span-12 flex mt-5 md:mt-0 md:justify-end">
             {currentStep === 1 && (
-              <button className="btn bg-zinc-800 font-bold text-white w-[140px] cursor-pointer" onClick={handleStep} disabled={field}>
+              <button
+                className="btn bg-zinc-800 font-bold text-white w-[140px] cursor-pointer"
+                onClick={handleStep}
+                disabled={field}
+              >
                 Next
               </button>
             )}
 
             {currentStep === 2 && (
               <div className="flex justify-end gap-4">
-                <button onClick={handleStep} className="btn bg-zinc-800 font-bold text-white w-[140px] cursor-pointer">Previous</button>
-            <button
-              className="btn bg-blue-500 md:w-40 hover:bg-blue-600 text-white rounded-lg w-[140px]"
-              type="submit"
-              disabled={isSubmitting || field}
-            >
-              {isSubmitting ? "Saving..." : "Save"}
-            </button>
+                <button
+                  onClick={handleStep}
+                  className="btn bg-zinc-800 font-bold text-white w-[140px] cursor-pointer"
+                >
+                  Previous
+                </button>
+                <button
+                  className="btn bg-blue-500 md:w-40 hover:bg-blue-600 text-white rounded-lg w-[140px]"
+                  type="submit"
+                  disabled={mutation.isPending || field}
+                >
+                  {mutation.isPending ? "Saving..." : "Save"}
+                </button>
               </div>
             )}
           </div>

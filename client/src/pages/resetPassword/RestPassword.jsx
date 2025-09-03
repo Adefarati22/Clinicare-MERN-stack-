@@ -25,7 +25,6 @@ export default function ResetPassword() {
 // look for values on our url bar
 const email = searchParams.get("email");
 const token = searchParams.get("token");
-// console.log({email,token}); to test if it was working
 
 
   const [confirmVisible, setConfirmVisible] = useState(false);
@@ -52,7 +51,7 @@ const token = searchParams.get("token");
       navigate("/account/signin")
     },
     onError: (error) => {
-      console.log(error);
+        import.meta.env.DEV && console.log(error);
       setError(error?.response?.data?.message);
     },
   });
