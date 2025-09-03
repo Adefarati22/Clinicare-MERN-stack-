@@ -141,7 +141,7 @@ export default function Register() {
             Already have an account?{" "}
             <Link to={"/account/signin"} className="text-blue-500 font-bold">
               {" "}
-              Login{" "}
+              Signin{" "}
             </Link>
           </p>
         </fieldset>

@@ -5,7 +5,7 @@ export default function Paginate({
   currentPage,
 }) {
   return (
-    <div className="flex justify-center md:justify-between items-center py-4">
+    <div className="md:flex justify-center md:justify-between items-center py-4">
       <p className="hidden md:block">
         Showing page {currentPage} of {totalPages} pages
       </p>

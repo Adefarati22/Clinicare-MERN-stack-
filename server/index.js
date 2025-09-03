@@ -30,7 +30,7 @@ const app = express();
 // we have route and app middleware, this one that we did will affect all the app, this are the inbuilt middleware from express
 app.use(
   cors({
-    origin: ["http://localhost:4800"],
+    origin: ["http://localhost:4800", "https://clinicare-esther-client.vercel.app"],
     credentials: true, //to allow cookies to be sent with requests
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"], //permitted http methods
     optionsSuccessStatus: 200, //default status

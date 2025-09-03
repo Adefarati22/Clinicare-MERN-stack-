@@ -1,8 +1,8 @@
 export default function TableBody({ tableColumns, tableData, renderCell }) {
   return (
     <div className="overflow-x-auto">
-      <table className="table">
-        <thead>
+      <table className="table bg-white">
+        <thead className="">
           <tr>
             <th>#</th>
             {tableColumns.map((header) => (
@@ -15,10 +15,7 @@ export default function TableBody({ tableColumns, tableData, renderCell }) {
         <tbody>
           {tableData?.length > 0 ? (
             tableData.map((item, index) => (
-              <tr
-                key={item._id}
-                className="hover:bg-base-300 border-gray-300"
-              >
+              <tr key={item._id} className="hover:bg-base-300 border-gray-300">
                 <td>{index + 1}</td>
                 {tableColumns.map((header) => (
                   <td key={header.uid}>

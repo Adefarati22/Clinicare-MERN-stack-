@@ -58,7 +58,7 @@ export default function VerifyAccount() {
           }
           return prev - 1;
         });
-      }, 1000);
+      }, 90);
       //this function will be called when the user clicks on the resend code button, it is used to set
     }
 

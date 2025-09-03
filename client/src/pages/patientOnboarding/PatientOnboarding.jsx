@@ -286,7 +286,7 @@ export default function PatientOnboarding() {
               {/* emergency contact */}
               <div className="col-span-6">
                 <fieldset className="fieldset">
-                  <legend className="fieldset-legend">Emergency contact</legend>
+                  <legend className="fieldset-legend">Emergency contact name</legend>
                   <input
                     type="text"
                     className="input"

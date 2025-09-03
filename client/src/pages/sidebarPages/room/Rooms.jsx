@@ -1,4 +1,5 @@
 import { getAllRooms } from "@/api/room";
+import ErrorAlert from "@/component/ErrorAlert";
 import { SkeletonTable } from "@/component/LazyLoader";
 import PageWrapper from "@/component/PageWrapper"
 import Paginate from "@/component/Paginate";
@@ -62,8 +63,6 @@ export default function Rooms() {
                     </div>
                   ) : (
                     <>
-                      {rooms?.length > 0 ? (
-                        <>
                           <Suspense fallback={<SkeletonTable />}>
                             <Table rooms={rooms} />
                           </Suspense>
@@ -74,10 +73,6 @@ export default function Rooms() {
                             currentPage={currentPage}
                           />
                         </>
-                      ) : (
-                        <p className="mt-6 font-semibold text-center">No rooms found</p>
-                      )}
-                    </>
                   )}
                   </>}
       </PageWrapper>

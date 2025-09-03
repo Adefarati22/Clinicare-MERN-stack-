@@ -77,14 +77,8 @@ export default function ForgotPassword() {
             type="submit"
             disabled={isSubmitting || mutation.isPending}
           >
-            {isSubmitting || mutation.isPending ? "Sending Link..." : "Send Link"}
+            {isSubmitting || mutation.isPending ? "Sending..." : "Send Reset Link"}
           </button>
-          <p className="text-gray-600 text-sm text-center">
-            Remember your password? {" "}
-            <Link to={"/account/signin"} className="text-blue-500 font-bold">
-              Login
-            </Link>
-          </p>
         </fieldset>
       </form>
     </div>

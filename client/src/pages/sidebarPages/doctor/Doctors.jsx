@@ -61,8 +61,6 @@ export default function Doctors() {
                         </div>
                       ) : (
                         <>
-                          {doctors?.length > 0 ? (
-                            <>
                               <Suspense fallback={<SkeletonTable />}>
                                 <Table doctors={doctors}/>
                               </Suspense>
@@ -73,10 +71,6 @@ export default function Doctors() {
                                 currentPage={currentPage}
                               />
                             </>
-                          ) : (
-                            <p className="mt-6 font-semibold text-center">No doctors found</p>
-                          )}
-                        </>
                       )}
                       </>}
     </PageWrapper>
