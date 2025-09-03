@@ -59,12 +59,10 @@ export default function Appointments() {
           Manage patients appointments.
         </p>
       </div>
-      <div className="w-full overflow-x-auto">
-      <div className="flex mb-5 justify-end items-center">
+      <div className="flex flex-wrap gap-2 mb-5 justify-end items-center">
         <Search id="search-adminAppointments">
           <Filter />
         </Search>
-      </div>
       </div>
       {isPending ? (
         <SkeletonTable />
