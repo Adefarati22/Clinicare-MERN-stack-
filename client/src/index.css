@@ -59,3 +59,16 @@ body {
     opacity: 0;
   }
 }
+
+a,
+button,
+.btn {
+  transition: all 150ms ease;
+}
+
+a:hover,
+button:hover,
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
