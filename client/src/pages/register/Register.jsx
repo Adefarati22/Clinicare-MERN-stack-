@@ -41,7 +41,7 @@ export default function Register() {
       //what you want to do if api call is a success
       toast.success(response?.data?.message || "Registration successful"); //toast
       setAccessToken(response?.data?.data?.accessToken); // save accessToken
-        if(!user?.isVerified) {
+        if(user && !user?.isVerified) {
         navigate("/Verify-account")
       }
     },

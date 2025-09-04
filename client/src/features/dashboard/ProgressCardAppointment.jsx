@@ -34,12 +34,12 @@ export default function ProgressCardAppointment({ appointmentSummary }) {
   return (
     <>
       <h1 className="font-bold mb-2">Appointment summary</h1>
-      <div className="w-full grid grid-cols-12 md:grid-cols-6 gap-4">
+      <div className="w-full grid grid-cols-12  gap-4">
         {items.map(({ key, label, color, ring }) => {
           const pct = percentages[key] || 0;
           const cnt = counts[key] || 0;
           return (
-            <div key={key} className="col-span-12 bg-white rounded-lg p-4">
+            <div key={key} className="col-span-12 md:col-span-4 bg-white rounded-lg p-4">
               <p className="font-semibold mb-3">{label}</p>
               <div className="flex items-center gap-4">
                 <div

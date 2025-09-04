@@ -134,31 +134,25 @@ export default function Dashboard() {
               </div>
             </div>
           )}
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-8">
-              <RecentAppointments
-                appointments={stats?.recentAppointments}
-                user={user}
-              />
-            </div>
-            <div className="col-span-12 md:col-span-4">
-              <ProgressCardAppointment
-                appointmentSummary={stats?.appointmentSummary}
-                user={user}
-              />
-            </div>
+        <div className="space-y-4">
+            <ProgressCardAppointment
+              appointmentSummary={stats?.appointmentSummary}
+              user={user}
+            />
+            <ProgressCardPayment
+              paymentSummary={stats?.paymentSummary}
+              user={user}
+            />
           </div>
-          <div className="grid grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-8">
-              <RecentPayments payments={stats?.recentPayments} user={user} />
-            </div>
-            <div className="col-span-12 md:col-span-4">
-              <ProgressCardPayment
-                paymentSummary={stats?.paymentSummary}
-                user={user}
-              />
-            </div>
+          <div className="space-y-4">
+            <RecentAppointments
+              appointments={stats?.recentAppointments}
+              user={user}
+            />
+            <RecentPayments payments={stats?.recentPayments} user={user} />
           </div>
+         
+          
         </div>
       </div>
     </PageWrapper>

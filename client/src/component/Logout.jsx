@@ -21,7 +21,7 @@ export default function Logout() {
       queryClient.clear() //to clear all queries rather than just the user
       setIsOpen(false);
       setAccessToken(null); // Clear the access token from context
-      navigate('/account/signin');
+      navigate('/account/signin', {replace:true});
     },
     onError: (error) => {
      import.meta.env.DEV && console.log(error);
