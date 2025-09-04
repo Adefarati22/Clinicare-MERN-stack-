@@ -44,7 +44,7 @@ export default function PaymentsTable({ payments, user }) {
       case "status":
         return (
           <div
-            className={`capitalize  badge-xs md:badge-lg font-semibold ${
+            className={`capitalize  badge-xs md:badge-md font-semibold ${
               paymentStatusColors[payment.status]
             }`}
           >

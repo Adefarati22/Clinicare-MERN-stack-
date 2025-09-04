@@ -38,7 +38,7 @@ export default function Table({ appointments }) {
       case "status":
         return (
           <div
-            className={`capitalize badge badge-xs md:badge-lg font-bold ${
+            className={`capitalize badge badge-xs md:badge-md font-bold ${
               appointmentsStatusColors[appointments?.status]
             }`}
           >

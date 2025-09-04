@@ -33,7 +33,7 @@ export default function UserCard({ item }) {
           <span className="font-bold text-xl"> {item?.fullname}</span>
           <span className="text-gray-500 text-sm">{item?.email}</span>
           <div
-            className={`capitalize badge badge-xs md:badge-lg font-semibold my-2 ${
+            className={`capitalize badge badge-xs md:badge-md font-semibold my-2 ${
               usersRoleColors[item?.role] //we put the item.role in a square bracket so that the userRoleColors object will be able to look into the item.role since its dependent on it
             }`}
           >
