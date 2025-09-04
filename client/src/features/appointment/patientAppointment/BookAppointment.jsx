@@ -64,7 +64,7 @@ export default function BookAppointment() {
   return (
     <div>
       <button
-        className="bg-blue-500 text-white font-bold border border-gray-300 p-2 rounded-md cursor-pointer"
+        className="btn btn-md bg-blue-500 text-white font-bold cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         Book Appointment
